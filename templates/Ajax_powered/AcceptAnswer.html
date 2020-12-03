@@ -1,0 +1,46 @@
+{% load static %}
+{% if Answers != " " %}
+<div class="col s10 push-s2">
+          <h2>Answers</h2>
+</div>
+              {% for full_ans in Answers %}
+      <div class="col s10 push-s2 ">
+    <div class="card horizontal z-depth-2 hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+           <h6><b>Answered by:</b></h6>
+            <div class="chip">
+                <img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person"><a href="/OpenProfile/{{full_ans.author}}/">{{full_ans.author}}</a>
+            </div>
+            <li class="divider black"></li>
+            <p>&nbsp;</p>
+            <h6><b>Answer: </b></h6><br>
+            {{ full_ans.body | safe }}
+
+        </div>
+        <div class="card-action">
+            {% if full_ans.isanswer == True %}
+            <a class="btn-floating btn-small  waves-effect waves-light red pulse tooltipped " data-position="right" data-tooltip="Owner accepted this answer"><i class="material-icons green-text">beenhere</i></a>
+             {% endif %}
+            {% if full_ans.isanswer == False %}
+             <a class="btn-floating btn-small  waves-effect waves-light black tooltipped " data-position="right" data-tooltip="Owner not accepted this as answer"><i class="material-icons">beenhere</i></a>
+            {% endif %}
+            {% for full_q in full_question %}
+            {% if user == full_q.author %}
+            {% if full_ans.isanswer == False %}
+            <a value="{{full_q.slug}}" value2 = "{{full_ans.id}}" class="btn-floating btn-small  waves-effect waves-light black tooltipped" id="acceptanswer" data-position="right" data-tooltip="Accept this as answer? "><i class="material-icons">favorite_border</i></a>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <!--<a class="btn-floating btn-small waves-effect s3 c14 waves-light black"><i class="material-icons">spa</i></a>-->
+           <h8 class ="heading right"> Answered on  {{full_ans.updated_on}} by <a href="/OpenProfile/{{full_ans.author}}/">{{full_ans.author}}</a></h8>
+            {% if user == full_ans.author %}
+            <a id="DeleteAnswerButton" value1="{{full_ans.id}}" value2="{{full_ans.question_slug}}" value3="y" class="right">Delete Answer</a>
+            <a href="/EditAnswer/{{full_ans.question_slug}}/" class="right">Edit Answer</a>
+            {% endif %}
+            </div>
+      </div>
+    </div>
+  </div>
+          {% endfor %}
+          {% endif %}

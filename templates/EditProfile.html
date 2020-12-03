@@ -1,0 +1,124 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<style>
+.msg {
+  width:100%;
+  border: 1px solid;
+  padding:10px;
+  margin: 20px;
+  color: grey;
+}
+.msg-error {
+  // rouge
+  border-color: #d32f2f;
+  background-color: #ef5350;
+  color: white;
+}
+</style>
+{% if messages %} {% for message in messages %}
+<div class="row">
+    <div class="col s6 push-s2">
+       <div class="msg msg-error z-depth-3 scale-transition"> {{ message }} </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <h1>Profile Screen</h1><h8>Last seen:{{user_data.last_login}}</h8>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col s8">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="/OpenProfile/{{user}}/" class="black-text">Profile</a></li>
+        <li class="tab col s6 red lighten-3" class="active"><a href="/EditProfile/n/" class="black-text">Edit profile</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class ="row">
+    <div class="col s10 push-s2">
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+            <h5>Edit Profile Name & Team Name</h5>
+            <form action="/EditProfile/n/" method="POST">{% csrf_token %}
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">title</i>
+                 <input type="text" id="input11" value="{{user_data.first_name}}" name="fname" required>
+                   <label for="input11">Profile Name</label>
+                 </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">local_offer</i>
+                            <select searchable='Search team' id="xxxx" name="lname">
+                               {% for team in teams %}
+                               <option value="{{team.Team_name}}">{{team.Team_name}}</option>
+                               {% endfor %}
+                            </select>
+                          <label>Select Tream *</label>
+                        </div>
+                 <button class="btn waves-effect waves-light left pulse black" id= "submitanswer" type="submit">Update
+                </button>
+            </div>
+          </div>
+        </div>
+            </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class ="row">
+    <div class="col s10 push-s2">
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+            <h5>Change Password </h5>
+            <form action="/EditProfile/Y/" method="POST">{% csrf_token %}
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">weekend</i>
+                 <input type="password" id="input1"  name="old_password" required>
+                   <label for="input1">Old Password</label>
+                 </div>
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">wc</i>
+                 <input type="text" id="input2" name="new_pw_one" required>
+                   <label for="input2">New Passowrd</label>
+                 </div>
+                  <div class="input-field col s12">
+                 <i class="material-icons prefix">wc</i>
+                 <input type="password" id="input3" name="new_pw_two"  required>
+                   <label for="input3">Repeat New Password</label>
+                 </div>
+                 <button class="btn waves-effect waves-light left pulse black" id= "submitpassword" type="submit">Change Password
+                </button>
+            </div>
+          </div>
+        </div>
+            </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+      var instance = M.Tabs.init(el, options);
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+</script>
+{% endblock content %}

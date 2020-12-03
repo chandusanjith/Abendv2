@@ -1,0 +1,182 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+
+<style>img {
+    display: block;
+    max-width:900px;
+    max-height:1100px;
+    width: auto;
+    height: auto;
+}</style>
+
+<head>
+    {% for full_t in FullTutorial %}
+    <title>{{ full_t.title}}</title>
+    {%endfor%}
+    <script src="{% static 'ckeditor/ckeditor_standard/ckeditor.js' %}"></script>
+</head>
+
+<div class ="row">
+    {% for full_t in FullTutorial %}
+      <div class="col s10 push-s2">
+          <h3 class="header"><b>{{ full_t.title}}</b></h3>
+          <h5>Written: {{full_t.created_on }}, Viewed: {{full_t.views }} times
+          </h5>
+    <div class="card horizontal hoverable ">
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Tutorial written by :</b></h6>
+            <div class="chip">
+                <img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person"><a href="/OpenProfile/{{full_t.author}}/">{{full_t.author}}</a>
+            </div>
+            <li class="divider black"></li>
+            <p>&nbsp;</p>
+            <h6><b>Tutorial:</b></h6><br>
+            {{ full_t.body | safe }}
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <li class="divider black"></li>
+            <h6><b>Tags:</b></h6><br>
+            {% for tags in full_t.tags.all %}
+            <span class="new badge grey left" data-badge-caption={{tags}}></span>
+            {% endfor %}
+        </div>
+          <div class="card-action" id="Hot">
+              {% include 'Ajax_powered/MarkHot.html' %}
+          </div>
+      </div>
+    </div>
+          {% endfor %}
+
+    <div id="Comments">
+        {% include 'Ajax_powered/Comments.html' %}
+    </div>
+    <br>
+    <h5>Add Comment</h5>
+          {% for full_t in FullTutorial %}
+    <form action = "/AddComment/{{ full_t.slug}}" method = "POST">{% csrf_token %}
+        {% endfor %}
+    <div class="row">
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">comment</i>
+                 <input type="text" id="autocomplete-input" name="cktext" class="autocomplete" required>
+                   <label for="autocomplete-input">
+                    Comments</label>
+                 </div>
+    <br>
+    </div>
+    <button class="btn waves-effect waves-light left pulse black" id= "submitanswer" type="submit">Add comment
+        <br>
+        <br>
+    </button></form>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#DeleteComment', function(event){
+    event.preventDefault();
+    var id;
+    var slug;
+    var tut;
+    id = $(this).attr("value1");
+    slug = $(this).attr("value2");
+    tut = $(this).attr("value3");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/DeleteAnswer/",
+        data:{
+                 'id': id,
+                 'slug':slug,
+                 'tut':tut,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#Comments').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#hot', function(event){
+    event.preventDefault();
+    var catid;
+    catid = $(this).attr("value1");
+    var istut;
+    istut = $(this).attr("value2");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AddLike/",
+        data:{
+                 'post_id': catid,
+                 'istut': istut,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#Hot').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#like', function(event){
+    event.preventDefault();
+    var ansid;
+    ansid = $(this).attr("value");
+    var slug;
+    slug = $(this).attr("slug");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AddCommentLike/",
+        data:{
+                 'Ans_id': ansid,
+                 'slug':slug,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#Comments').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#dislike', function(event){
+    event.preventDefault();
+    var ansid;
+    ansid = $(this).attr("value");
+    var slug;
+    slug = $(this).attr("slug");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AddCommentDisLike/",
+        data:{
+                 'Ans_id': ansid,
+                 'slug':slug,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#Comments').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+{% endblock content %}

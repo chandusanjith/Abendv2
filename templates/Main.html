@@ -1,0 +1,261 @@
+
+{% load static %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/BodyDarkLiteToggle.css' %}">
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor-init.js' %}"></script>
+
+
+<head>
+    <title>🅰🅱🅴🅽🅳</title>
+    <script src="{% static 'js/MaterilizeMain.js' %}"></script>
+</head>
+
+<style>
+  .sidenav li.active{
+  background-color:#ef5350  !important;
+}
+</style>
+
+
+
+<!--<body onloadstart="myFunction()"></body>-->
+<div class="preloader-background">
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div>
+			<div class="gap-patch">
+				<div class="circle"></div>
+			</div>
+			<div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ul id="nav-mobile" class="sidenav sidenav-fixed" style="width:15%;z-index: 990; top: 60;">
+    <br>
+    {% if '/Dashboard' in request.path %}
+      <li class="bold active">
+          {% else %}
+          <li class="bold">{% endif %}
+        <a href="/Dashboard/" class="waves-effect waves-teal "><i class="material-icons">dashboard</i>Dashboard</a>
+      </li>
+
+    <li class="divider"></li>
+    <li>
+        <a class="grey-text">Menu</a>
+    </li>
+        {% if '/main' in request.path or '/ShowQuestion/' in request.path or '/SearchQuestion' in request.path or '/EditQuestion/' in request.path or '/AskQuestion/' in request.path %}
+      <li class="bold active">
+          {% else %}
+          <li class="bold">{% endif %}
+        <a href="/main/" class="waves-effect waves-teal "><i class="material-icons">question_answer</i>Questions</a>
+      </li>
+          {% if '/ShowTutorials/' in request.path or '/DispTutorial/' in request.path or '/EditTutorial/' in request.path or '/AddTutorial/' in request.path %}
+      <li class="bold active">
+          {% else %}
+          <li class="bold">{% endif %}
+        <a href="/ShowTutorials/" class="waves-effect waves-teal"><i class="material-icons">book</i>Tutorials</a>
+      </li>
+          {% if request.path == '/ShowDevDrive/' or '/DevDrive/' in request.path %}
+      <li class="bold active">
+          {% else %}
+          <li class="bold">{% endif %}
+        <a href="/ShowDevDrive/" class="waves-effect waves-teal"><i class="material-icons">save</i>Dev Drive</a>
+      </li>
+          {% if request.path == '/ShowActivity/'  or '/AddActivity/' in request.path%}
+      <li class="bold active">
+          {% else %}
+          <li class="bold">{% endif %}
+        <a href="/ShowActivity/" class="waves-effect waves-teal"><i class="material-icons">local_activity</i>MyActivity</a>
+      </li>
+
+
+    <li class="divider"></li>
+              {% if request.path == '/About/' %}
+      <li class="bold active">{% endif %}
+          {% if request.path != '/About/' %}
+          <li class="bold">{% endif %}
+        <a href="/About/"  class="waves-effect waves-teal "><i class="material-icons">devices_other</i>About</a>
+      </li>
+              {% if request.path == '/Contact/' %}
+      <li class="bold active">{% endif %}
+          {% if request.path != '/Contact/' %}
+          <li class="bold">{% endif %}
+        <a href="/Contact/" class="waves-effect waves-teal "><i class="material-icons">contact_mail</i>Contact US</a>
+      </li>
+              {% if request.path == '/Api/' %}
+      <li class="bold active">{% endif %}
+          {% if request.path != '/Api/' %}
+          <li class="bold">{% endif %}
+        <a href="/Api/" class="waves-effect waves-teal "><i class="material-icons">bubble_chart</i>API</a>
+      </li>
+    <h3> 🅰🅱🅴🅽🅳</h3>
+</ul>
+<div class="navbar-fixed">
+<nav>
+     <div class="nav-wrapper">
+          <ul class="left">
+              <li><a href="collapsible.html" class="label-icon"></a><i class="material-icons"></i></li>
+              <li><a href="collapsible.html" class="label-icon"></a><i class="material-icons"></i></li>
+              <!--<li><a href="/Dashboard/" class="btn-floating btn-small waves-effect waves-light black tooltipped"  data-position="bottom" data-tooltip="Click to go Dashboard"><i class="material-icons">devices_other</i></a></li>-->
+              <li><h5 href = "/Dashboard/" class="tooltipped"  data-position="bottom" data-tooltip="ABEND"> 🅰🅱🅴🅽🅳</h5></li>
+          </ul>
+          <ul class="hide-on-med-and-down right">
+               <li>
+                   <form action="/SearchQuestion/" method="post">{% csrf_token %}
+                         <div class="input-field inline tooltipped " data-position="bottom" data-tooltip="Search tags ex: cobol, python, android ">
+                         <input id="search1" type="search" name="query" placeholder="search" size="80">
+                         <label class="label-icon" for="search1"><i class="material-icons black-text">search</i></label>
+                         </div>
+                   </form>
+                </li>
+                <li><a href ="/OpenProfile/{{user}}/" class="blue-text tooltipped"  data-position="bottom" data-tooltip="Click here for my profile page"><i class="material-icons right">person</i> Hi, {{user | truncatechars:12}} </a></li>
+                <li><a onclick="myLogout();" class="black-text tooltipped"  data-position="bottom" data-tooltip="Logout from application"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a class="dark-toggle tooltipped black-text" onclick="myDark()"  data-position="bottom"  data-tooltip="Toggle dark/light themes" ><i class="material-icons">brightness_4</i></a></li>
+                <li><a href="/AppTour/" class="black-text tooltipped dropdown-trigger"  data-position="bottom" data-tooltip="Tour"><i class="material-icons " >help</i></a></li>
+                <li><a href="collapsible.html" class="label-icon"></a><i class="material-icons"></i></li>
+                <li><a href="collapsible.html" class="label-icon"></a><i class="material-icons"></i></li>
+            </ul>
+     </div>
+</nav>
+</div>
+<ul id='dropdown2' class='dropdown-content black' style="min-width: 400px; max-height:500px">
+    {% for notifs in notofications %}
+    <li><a href="/ShowDevDrive/" class="white-text">{{notifs.message}} on {{notifs.created_on}}</a></li>
+    <div class="divider"></div>
+    {% empty %}
+    <li><a class="white-text">No Notifications !!!</a></li>
+    {% endfor %}
+  </ul>
+
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+        <h3 class="header left"><b>All Questions</b></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col s10 push-s2">
+        <h6 class="header left"><b>These questions and recommended by Machine Learning Algorithm based on your interests</b></h6>
+    </div>
+</div>
+{% for qdata in questions %}
+<div class ="row">
+    <div class="col s10 push-s2">
+         <div id="questions" class="card horizontal z-depth-2 hoverable">
+              <div class="card-stacked">
+                   <div class="card-content">
+                        <span class="new badge red" data-badge-caption="DownVotes">{{qdata.downvotes}}</span>
+                        <span class="new badge purple" data-badge-caption="UpVotes">{{qdata.upvotes}}</span>
+                        <span class="new badge blue" data-badge-caption="Answers">{{qdata.answers}}</span>
+                        <span class="new badge Green" data-badge-caption="Views">{{qdata.views}}</span>
+                        {% if qdata.isclosed == True %}
+                       <a href ="/ShowQuestion/{{qdata.slug}}/" class="tooltipped"  data-position="left" data-tooltip="Click to view full question "><b>{{qdata.title}}  [Closed] [SPAM]</b> </a>
+                       {% endif %}
+                        {% if qdata.isclosed == False %}
+                       <a href ="/ShowQuestion/{{qdata.slug}}/" class="tooltipped"  data-position="left" data-tooltip="Click to view full question "><b>{{qdata.title}}</b></a>
+                        {% endif %}
+                   </div>
+                   <div class="card-action">
+                       {% for tags in qdata.tags.all %}
+                       {% if forloop.counter <= 6 %}
+                       <span class="new badge black" data-badge-caption={{tags}}></span>{% endif %}
+                       {% endfor %}
+                       <h8> Asked on {{qdata.created_on}} by </h8><a href="/OpenProfile/{{qdata.author}}/" >{{qdata.author}}</a>
+                   </div>
+              </div>
+          </div>
+    </div>
+</div>
+{% empty %}
+<div class="row">
+<div class="col s10 push-s2">
+    <h2><b>Sorry!! no results found.</b></h2>
+</div></div>
+
+{% endfor %}
+<body>
+<header></header>
+<main></main>
+{% endblock content%}
+<div  id="menu" class="fixed-action-btn">
+    <a class="btn-floating   btn-large red pulse">
+       <i class="large material-icons ">menu</i>
+    </a>
+    <ul>
+       <li><a href = "/DevDrive/" class="btn-floating purple tooltipped"  data-position="left" data-tooltip="Add files to Drive"><i class="material-icons">cloud_upload</i></a></li>
+       <li><a href = "/AddActivity/" class="btn-floating orange tooltipped"  data-position="left" data-tooltip="Update Daily Activity"><i class="material-icons">add_to_photos</i></a></li>
+       <li><a href = "/AddTutorial/" class="btn-floating green tooltipped"  data-position="left" data-tooltip="Add a tutorial" ><i class="material-icons">publish</i></a></li>
+       <li><a href = "{% url 'AskQuestion' %}" class="btn-floating blue tooltipped" data-position="left" data-tooltip="Ask Question" ><i class="material-icons">rate_review</i></a></li>
+     </ul>
+</div>
+
+<div class="tap-target" data-target="menu">
+     <div class="tap-target-content">
+         <h5>Main Menu</h5>
+         <p> You can ask questions where senior developers will give answers and you can write a tutorial of any new technology</p>
+    </div>
+</div>
+<footer class=" page-footer white " id = "myFooter">
+        <div class="container">
+             <footer class="footer-copyright white"><br>
+                  <a class="indigo-darken-4-text text-lighten-4 left">© 2020 Commercial DEV</a>
+                  <a class="indigo-darken-4-text text-lighten-4 left " href="#!">Terms</a>
+                  <a onclick="next(0)" class="indigo-darken-4-text text-lighten-4 left " href="#!">Help</a>
+                  <a class="material-icons" href="/Dashboard/">devices_others</a>
+                  <a class="indigo-darken-4-text text-lighten-4 right " href="/Contact/">Contact Commercial Team</a>
+                  <a class="indigo-darken-4-text text-lighten-4 right " href="/Api/">API</a>
+                  <a class="indigo-darken-4-text text-lighten-4 right " href="/About/">About</a>
+             </footer>
+        </div>
+</footer>
+
+<script>
+ $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+
+</script>
+
+<script>
+function myLogout() {
+  if (confirm("Logout ? Are you sure !")) {
+    window.location.href = '/Logout/';
+  }
+}
+</script>
+
+<script type="text/javascript">
+    $('.sidenav li').click(function(){
+      $('.sidenav li.active').removeClass('active');
+      $(this).closest('li').addClass('active');
+    });
+</script>
+<script src="{% static 'js/MaterilizeHelp.js' %}"></script>
+<script src="{% static 'js/MaterilizeTooltopped.js' %}"></script>
+<script src="{% static 'js/MaterilizeDropdownToggle.js' %}"></script>
+<script src="{% static 'js/MaterilizeDarkToggle.js' %}"></script>
+<script src="{% static 'js/MaterilizeModal.js' %}"></script>
+<script src="{% static 'js/MaterilizeDatePicker.js' %}"></script>
+<script src="{% static 'js/MaterilizeDropSearch.js' %}"></script>
+<script src="{% static 'js/MaterilizeAutoComplete.js' %}"></script>
+<script src="{% static 'js/MaterilizeChips.js' %}"></script>
+<script src="{% static 'js/dropselect.js' %}"></script>
+</body>

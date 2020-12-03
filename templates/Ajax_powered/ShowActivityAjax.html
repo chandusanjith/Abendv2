@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col s10 push-s2">
+    <div class="card hoverable transparent">
+        <div class="card-content">
+            <table>
+                <thead>
+                <tr>
+                    <th>Sr.no</th>
+                    <th>Date</th>
+                    <th>Ticket No./Task/Issue</th>
+                    <th>Bank Name</th>
+                    <th>Discription</th>
+                    <th>Action/Remarks</th>
+                    <th>Data sent to TL</th>
+                    <th>Delete?</th>
+                </tr>
+                </thead>
+                {% if activities %}
+                {% for activity in activities%}
+                  <tbody>
+                      <tr>
+                          <td>{{forloop.counter}}</td>
+                         <td>{{activity.created_on}}</td>
+                         <td>{{activity.Title}}</td>
+                          <td>{{activity.Bank_name}}</td>
+                         <td>{{activity.Description}}</td>
+                         <td>{{activity.Action}}</td>
+                          <td>{{activity.Sent_status}}</td>
+                          <td> <a id="DeleteActivityButton" value="{{activity.id}}" class="material-icons">delete</a> </td>
+                       </tr>
+                    </tbody>
+                {% endfor %}
+                {% endif %}
+                {% if not activities %}
+                <tbody>
+                   <h4>NO DATA FOUND</h4>
+                   <a href="/AddActivity/" class="header red-text">Click here to add new activity</a>
+                </tbody>
+                {% endif %}
+            </table>
+        </div></div>
+    </div>
+</div>

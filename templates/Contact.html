@@ -1,0 +1,45 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <h3>Contact Commercial Dev</h3>
+    <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col s10 push-s2">
+    <div class="card hoverable transparent">
+        <div class="card-content">
+            <div class="row">
+               <form class="col s12" method = "POST" action="/Contact/">  {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="First Name" name="fnames" id="first_name" type="text" class="validate" required>
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Last Name" id="last_name" name="snames" type="text" class="validate" required>
+                            <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Contact Number" id="c-no" type="number" name="cno" class="validate" required>
+                            <label for="c-no">Contact Number</label>
+                        </div>
+                    </div>
+                        <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Comment" id="comment" type="text" class="validate" name="comm" required>
+                            <label for="comment">Comment</label>
+                        </div>
+                        </div>
+                   <button class="btn waves-effect waves-light left pulse black" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Send
+                </button>
+               </form>
+            </div>
+        </div>
+    </div></div></div>
+{% endblock content %}

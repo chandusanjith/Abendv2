@@ -1,0 +1,27 @@
+            {% for full_q in full_question %}
+            {% if like_status == True %}
+            <a  class="btn-floating btn-small  waves-effect waves-light black " istut="N" id="like"  value ="{{ full_q.slug }}"><i class="material-icons blue-text">thumb_up</i></a>
+            {% endif %}
+            {% if like_status == False %}
+            <a  class="btn-floating btn-small waves-effect waves-light black pulse" id="like" istut="N" value ="{{ full_q.slug }}"> <i class="material-icons ">thumb_up</i></a>
+            {% endif %}
+            <b>{{full_q.upvotes}}</b>
+            {% if dislike_status == True %}
+            <a class="btn-floating btn-small waves-effect waves-light black " id="dislike" value ="{{ full_q.slug }}"><i class="material-icons blue-text">thumb_down</i></a>
+            {% endif %}
+            {% if dislike_status == False %}
+            <a class="btn-floating btn-small waves-effect waves-light black" id="dislike" value ="{{ full_q.slug }}"><i class="material-icons">thumb_down</i></a>
+            {% endif %}
+            <b>{{full_q.downvotes}}</b>
+            <!--<a class="btn-floating btn-small waves-effect s3 c14 waves-light black"><i class="material-icons">spa</i></a>-->
+           <h8 class ="heading right"> Asked on {{ full_q.created_on }} by <a href="/OpenProfile/{{full_q.author}}/">{{full_q.author}}</a></h8>
+            {% if user == full_q.author %}
+            <a class="right" href="/EditQuestion/{{full_q.slug}}/">EDIT</a>
+            {% if Answers != " " %}
+            <a class="modal-trigger right" href="#modal3" data-target="modal3">Delete</a>
+            {% endif %}
+            {% if Answers == " " %}
+            <a class="modal-trigger right" href="#modal2" data-target="modal2">Delete</a>
+            {% endif %}
+            {% endif %}
+            {% endfor %}

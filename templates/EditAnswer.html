@@ -1,0 +1,64 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <br>
+    <h4 class="header">Edit Answer</h4>
+    <br>
+    <br>
+    </div>
+</div>
+{% for edit in edits %}
+<form action = "/EditAnswer/{{edit.question_slug}}/" method="POST"> {% csrf_token %}
+<div class ="row">
+    <div class="col s10 push-s2">
+      <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                   <br>
+                   Body : Include all the information someone would need to answer your question
+                                {{ form.media }}
+                                {{ form }}
+                 <br>
+                 <button class="btn waves-effect waves-light black left pulse" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</form>
+{% endfor %}
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.autocomplete');
+    var instances = M.Autocomplete.init(elems, options);
+  });
+
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('input.autocomplete').autocomplete({
+      data: {
+        "Apple": null,
+        "Microsoft": null,
+        "Google": 'https://placehold.it/250x250'
+      },
+    });
+  });
+</script>>
+<script>
+    var chip = {
+    tag: 'chip content',
+    image: '', //optional
+  };
+</script>
+{% endblock content %}

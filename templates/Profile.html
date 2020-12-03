@@ -1,0 +1,125 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<header>
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</header>
+<div class="row">
+    <div class="col s10 push-s2">
+    <h1>Profile Screen</h1><h8>Last seen:{{user_data.last_login}}</h8>
+    </div>
+</div>
+{% if owner == True %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <div class="row">
+    <div class="col s8">
+      <ul class="tabs">
+        <li class="tab col s6 red lighten-3" class="active" ><a href="/OpenProfile/{{user}}/" class="black-text">Profile</a></li>
+        <li class="tab col s6 "><a href="/EditProfile/n/" class="black-text">Edit profile</a></li>
+      </ul>
+    </div>
+  </div>
+    </div></div>
+{% endif %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <div class="row">
+    <div class="col s4 m4">
+      <div class="card" style="height: 350px;">
+        <div class="card-image">
+          <img src="{% static '/images/portfolio-img1.jpg' %}">
+            <!--<a class="btn-floating btn-large halfway-fab left"><img class="circle profile-image" src="{% static '/images/portfolio-img1.jpg' %}"></a>-->
+        </div>
+        <div class="card-content">
+          <p><h5>{{user_data.first_name}}</h5>
+             <h6>{{ user_data.last_name}}</h6></p>
+        </div>
+      </div>
+    </div>
+        <div class="col s4 m8">
+      <div class="card " style="height: 350px;">
+        <div class="card-image">
+          <!--<img src="{% static '/images/gitfinal.svg' %}">-->
+            <!--<a class="btn-floating btn-large halfway-fab left"><img class="circle profile-image" src="{% static '/images/portfolio-img1.jpg' %}"></a>-->
+        </div>
+        <div class="card-content">
+            {% for rep in  reputation %}
+            <h8>Reputation Earned: {{rep.reputation_count}} of 3000</h8>
+            <div class="progress tooltipped"  data-position="bottom" data-tooltip=" {{percent}} %">
+                <div class="determinate" style="width: {{percent}}%"></div>
+           </div>
+            {% endfor %}
+            <div class="divider"></div><br>
+            {% for badg in badges %}
+            {% for bad in badg.Badges_earned.all %}
+               <div class="chip tooltipped"  data-position="bottom" data-tooltip=" Earned for getting reputation">
+              <img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person">{{ bad }}
+  </div>            {% endfor %}{% endfor %}
+        </div>
+      </div>
+        </div></div>
+        </div>
+</div>
+<div>
+</div>
+    <div class="row">
+        <div class="col s10 push-s2">
+         <div class="card horizontal ">
+              <div class="card-stacked">
+                   <div class="card-content">
+                       <ul class="collection with-header">
+                            <li class="collection-header grey lighten 3"><h6>Questions Asked</h6></li>
+                           {% for user_q in questions %}
+                            <a href="/ShowQuestion/{{user_q.slug}}/" class="collection-item">{{ user_q.title}}</a>
+                           {% endfor %}
+                       </ul>
+                   </div>
+              </div>
+         </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col s10 push-s2">
+         <div class="card horizontal ">
+              <div class="card-stacked">
+                   <div class="card-content">
+                       <ul class="collection with-header">
+                            <li class="collection-header grey lighten 3"><h6>Answered Questions</h6></li>
+                           {% for user_a in answered %}
+                            {% for user_allq in all_questions %}
+                             {% if user_a.question_slug == user_allq.slug %}
+                            <a href="/ShowQuestion/{{user_allq.slug}}/" class="collection-item">{{ user_allq.title }}</a>
+                           {% endif %}
+                           {% endfor %}
+                           {% endfor %}
+                       </ul>
+                   </div>
+              </div>
+         </div>
+    </div>
+</div>
+     <div class="row">
+        <div class="col s10 push-s2">
+         <div class="card horizontal ">
+              <div class="card-stacked">
+                   <div class="card-content">
+                       <ul class="collection with-header">
+                            <li class="collection-header grey lighten 3"><h6>Tutorials</h6></li>
+                           {% for user_t in tutorials %}
+                            <a href="/DispTutorial/{{user_t.slug}}/" class="collection-item">{{ user_t.title}}</a>
+                           {% endfor %}
+                       </ul>
+                   </div>
+              </div>
+         </div>
+    </div>
+</div>
+<script>
+var instance = M.Tabs.init(el, options);
+// Or with jQuery
+$(document).ready(function(){
+    $('.tabs').tabs();
+});
+</script>
+{% endblock content %}

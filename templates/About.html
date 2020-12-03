@@ -1,0 +1,104 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>About 🅰🅱🅴🅽🅳</title>
+</head>
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <br>
+    <h4>🅰🅱🅴🅽🅳</h4>
+        <h5><b>You may know what this application does, so here we expalin you which technology we used in developing this application</b></h5>
+    <br>
+    <br>
+    </div>
+</div>
+    <div class="row">
+    <div class="col s5 push-s2">
+      <div class="card hoverable" >
+        <div class="card-image">
+          <img style="max-height:400px" src="{% static '/images/25323-notebook.gif' %}">
+            <span class="card-title black-text"><b>Front End</b></span>
+        </div>
+        <div class="card-content">
+          <p>Used Materilize css by Google for front end.
+              Created and designed by Google, Material Design is a design language that combines the classic principles of successful design along with innovation and technology. Our goal is to develop a system of design that allows for a unified user experience.</p>
+        </div>
+      </div>
+    </div>
+        <div class="col s5 push-s2">
+      <div class="card hoverable" >
+        <div class="card-image">
+          <img style="max-height:400px" src="{% static '/images/backend.gif' %}">
+          <span class="card-title"><b>Back End</b></span>
+        </div>
+        <div class="card-content">
+          <p>Used Python 3.7, developed using Django framework,
+             This application uses MVT(Model view template) architecture.
+             Same technology is also used by Instagram, Spotify. ...
+             YouTube. ...
+             The Washington Post. ...
+             Bitbucket. ...
+             Dropbox. ...
+              Eventbrite.</p>
+            <br>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s10 push-s2">
+        <div class="card hoverable" style="height:450;">
+            <div class="card-content">
+                <center><h4><b>Our 🅰🅱🅴🅽🅳 Stats</b></h4></center>
+                <br>
+                <div class="col s3 ">
+                    <center><b><h5>Questions Asked</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_questions}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Answers Submitted</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_answers}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Up Votes</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_upvotes}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Down Votes</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_downvotes}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Tutorials</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_tutorials}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Comment Likes</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_commentlikes}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Comment Dislikes</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_commentdislikes}}</h3></center>
+                </div>
+                <div class="col s3 ">
+                    <center><b><h5>Users</h5></b></center>
+                    <li class="divider"></li>
+                    <center><h3 class="blue-text">{{total_users}}</h3></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content%}

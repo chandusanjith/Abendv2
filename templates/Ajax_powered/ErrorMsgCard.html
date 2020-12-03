@@ -1,0 +1,24 @@
+{% if initload == False and question_review_good == False %}
+<div class="row">
+    <div class="col s10 push-s2">
+       <ul class="collapsible">
+           <li>
+            <div class="collapsible-header  red lighten-2 z-depth-5" ><i class="material-icons">warning</i>Please clear the below mentioned errors</div>
+            <div class="collapsible-body z-depth-5"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+       </ul>
+    </div>
+</div>
+{% endif %}
+{% if initload == False and question_review_good == True %}
+<div class="row">
+    <div class="col s10 push-s2">
+       <ul class="collapsible">
+           <li>
+            <div class="collapsible-header  green lighten-2 z-depth-5" ><i class="material-icons">check</i>Question seems to be correct</div>
+            <div class="collapsible-body z-depth-5"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+       </ul>
+    </div>
+</div>
+{% endif %}

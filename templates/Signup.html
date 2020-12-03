@@ -1,0 +1,82 @@
+
+{% load static %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+body {
+    background-color : #eeeeee;
+    background-image: url({% static '/images/gitfinal.svg' %});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right top;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+</style>
+<h3 class="header"> Kindly register yourself to continue </h3>
+{% if messages %} {% for message in messages %}
+<div class="msg msg-error z-depth-3 scale-transition"> {{ message }} </div>
+{% endfor %}{% endif %}
+<div class="card transparent">
+    <div class="card-content">
+        <h6 class="red-text">* required</h6>
+         <form class="col s12" method = "POST" action="/Signup/">  {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="User name" id="user-name" type="text" name="uname" class="validate" required>
+                            <label for="User-name" class="black-text">User Name *</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 ">
+                            <input placeholder="Full Name" name="fnames" id="Full_name" type="text" class="validate" required>
+                            <label for="Full_name" class="black-text">Full Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select searchable='Search team' id="xxxx" name="snames">
+                               {% for team in teams %}
+                               <option value="{{team.Team_name}}">{{team.Team_name}}</option>
+                               {% endfor %}
+                            </select>
+                          <label>Select Tream *</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Cedge Mail" id="cedge-mail" type="email" name="cmail" class="validate" required>
+                            <label for="cedge-mail" class="black-text">Cedge Mail *</label>
+                        </div>
+                    </div>
+                        <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Password" id="Password1" type="text" class="validate" name="Password1" required>
+                            <label for="Password1" class="black-text">Password *</label>
+                        </div>
+                        </div>
+             <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Re type Password" id="Password2" type="password" class="validate" name="Password2" required>
+                            <label for="Password2" class="black-text">Re type Password *</label>
+                        </div>
+                        </div>
+                   <button class="btn waves-effect waves-light right pulse" id= "submitanswer" type="submit">Register
+                </button>
+               </form>
+    </div>
+</div>
+<script src="{% static 'js/MaterilizeHelp.js' %}"></script>
+<script src="{% static 'js/MaterilizeTooltopped.js' %}"></script>
+<script src="{% static 'js/MaterilizeDropdownToggle.js' %}"></script>
+<script src="{% static 'js/MaterilizeDarkToggle.js' %}"></script>
+<script src="{% static 'js/MaterilizeModal.js' %}"></script>
+<script src="{% static 'js/MaterilizeDatePicker.js' %}"></script>
+<script src="{% static 'js/MaterilizeDropSearch.js' %}"></script>
+<script src="{% static 'js/MaterilizeAutoComplete.js' %}"></script>
+<script src="{% static 'js/MaterilizeChips.js' %}"></script>

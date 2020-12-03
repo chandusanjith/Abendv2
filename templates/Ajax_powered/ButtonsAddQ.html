@@ -1,0 +1,63 @@
+{% if initload == True and question_review_good == False %}
+<button class="btn waves-effect waves-light black left pulse" id= "review" ><i class="material-icons right">radio_button_unchecked</i>Review Question</button>
+{% endif %}
+{% if initload == False and question_review_good == True %}
+<button class="btn waves-effect waves-light black left pulse" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Submit</button>
+<div  class="row">
+    <div class="col s12">
+      <div class="card green lighten-3 z-depth-5">
+        <div class="card-content">
+            <div class="row">
+                <div class="col s2">
+                    <h4>🅰🅱🅴🅽🅳</h4>
+                </div>
+                <div class="s5">
+                    <b>Your question looks good, Kindly click on submit to add.</b>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% if initload == False and question_review_good == False %}
+<button class="btn waves-effect waves-light black left pulse" id= "review" ><i class="material-icons right">radio_button_unchecked</i>Review Question</button>
+<div id="SpamDiv" class="row">
+    <div class="col s12">
+      <div class="card red lighten-3 z-depth-5">
+        <div class="card-content">
+            <div class="row">
+                <div class="col s2">
+                    <h4>🅰🅱🅴🅽🅳</h4>
+                </div>
+                <div class="s5">
+                    <b>Our ML algorithms flagged your question as SPAM!!, Your question failed to meet our community guidelines.</b>
+                    <li class="divider"></li>
+                    <b>Flagged by : Navie Byas</b>
+                    <li class="divider"></li>
+                    <b>Flagged Reason : {{err_msg}}</b>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+$('#autocomplete-input').bind('input propertychange', function() {
+    $.ajax(
+    {
+        type:'POST',
+        url: "/ResetValues/",
+        data:{
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#buttons_sub_send').html(response['form']);
+        }
+    })
+});
+</script>

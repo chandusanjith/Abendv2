@@ -1,0 +1,64 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+        <h4 class="header"><b>Ask a public question</b></h4>
+    <br>
+    </div>
+</div>
+<form action = "/AskQuestion/" method="POST" id="qform"> {% csrf_token %}
+<div class ="row">
+    <div class="col s10 push-s2">
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">title</i>
+                 <input type="text" id="autocomplete-input" name="title" class="autocomplete" onchange="SpamLoad()" required>
+                   <label for="autocomplete-input">
+                    Title : Be specific and imagine you’re asking a question to another person</label>
+                 </div>
+                   <br>
+                   Body : Include all the information someone would need to answer your question
+                                {{ form.media }}
+                                {{ form }}
+
+                 <br>
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">local_offer</i>
+                 <input type="text" id="input" name="tags" class="autocomplete" required>
+                   <label for="input">Tags : Add tags to describe what your question is about (**GIVE COMA AFTER EACH TAG**)</label>
+                 </div><br><br>
+                   <button class="btn waves-effect waves-light black left pulse" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Submit</button>
+               </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div></div>
+</form>
+<script>
+    var chip = {
+    tag: 'chip content',
+    image: '', //optional
+  };
+</script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+{% endblock content %}

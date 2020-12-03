@@ -1,0 +1,81 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .ck-editor__editable_inline {
+    min-height: 500px !important;
+}
+</style>
+
+
+<!--<script type="text/javascript" src="{% static 'ckeditor_fulle/ckeditor.js' %}"></script>-->
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <br>
+        <h4 class="header"><b>Add tutorial: </b></h4><h6><b>Be specific and imagine you are teaching anther person</b></h6>
+    <br>
+    <br>
+    </div>
+</div>
+
+<form action = "/AddTutorial/" method="POST"> {% csrf_token %}
+<div class ="row">
+    <div class="col s10 push-s2">
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                 <div class="input-field col s12">
+                 <i class="material-icons prefix">title</i>
+                 <input type="text" id="autocomplete-input" name="title" class="autocomplete" required>
+                   <label for="autocomplete-input">Title : Be specific title should be matching with your tutorial</label>
+                 </div> Tutorial : Include all the information someone would need to learn from your tutorial
+                                {{ form.media }}
+                                {{ form }}
+                 <div class="input-field col s12">
+                     <i class="material-icons prefix">local_offer</i>
+                     <input type="text" id="input" name="tags" class="autocomplete" required>
+                     <label for="autocomplete-input">Tags : Add tags to describe what your tutorial is about</label>
+                 </div>
+                 <button class="btn waves-effect waves-light left black pulse" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Submit
+                 </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div>
+</div>
+</form>
+
+
+
+<!--<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">textsms</i>
+          <input type="text" id="autocomplete-input" class="autocomplete">
+          <label for="autocomplete-input">Autocomplete</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!--<script src="{% static 'ckeditor_fulle/ckeditor.js' %}"></script>-->
+
+<!--<script>
+CKEDITOR.replace('body', {width: 2000px});
+</script>-->
+<script>
+    var chip = {
+    tag: 'chip content',
+    image: '', //optional
+  };
+</script>
+{% endblock content %}

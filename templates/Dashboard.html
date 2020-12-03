@@ -1,0 +1,176 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<style>
+  tbody {
+  display:block;
+  height:400px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em )
+}
+table {
+  width:100%;
+}
+</style>
+
+<head>
+    <title>{{user}}'s Dashboard</title>
+</head>
+<div class="row">
+    <div class="col s10 push-s2">
+        <h4><b>Dashboard</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col s10 push-s2">
+        <div class="card z-depth-2 hoverable">
+            <button id="autoClickBtn" class="modal-trigger right" href="#modal2" data-target="modal2" hidden>Click me</button>
+            <b>Graphical representation of your Activity on this site.</b><b class="modal-trigger right" href="#modal2" data-target="modal2"><i class="material-icons right">help_outline</i>Help</b>
+            <div id="calendar_basic" class="card-panel "></div>
+        </div>
+     </div>
+</div>
+
+<div class="row">
+    <div class="col s6 push-s2">
+        <div class="card z-depth-2 hoverable" style="height:500">
+            <ul class="collection with-header">
+                <li class="collection-header  red lighten-1"><b> <i class="material-icons">people</i>Top Users With Highest Reputation</b></li>
+                <table>
+                <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Reputation </th>
+                    <th> Team Name </th>
+                    <th> Rank </th>
+                </tr>
+                </thead>
+                    <tbody>
+                    {% for users in top_users %}
+                      <tr>
+                          <td><a href="/OpenProfile/{{users.Rep_owner}}/">{{ users.Rep_owner }}</a></td>
+                          <td>{{ users.reputation_count }}</td>
+                          {% for all_u in all_users%}
+                          {% if all_u == users.Rep_owner %}
+                          <td>{{all_u.last_name}}</td>{%endif%}{%endfor%}
+                          <td>{{ forloop.counter}}</td>
+                       </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+    </div>
+    <div class="col s4 push-s2">
+        <div class="card z-depth-2 hoverable" style="height:500">
+            <ul class="collection with-header">
+                <li class="collection-header  red lighten-1"><b><i class="material-icons " >notifications_active</i> Notifications</b></li>
+                <table>
+                <thead>
+                <tr>
+                    <th> Recent Notifications</th>
+                </tr>
+                </thead>
+                    <tbody>
+                    {% for noti in notifications reversed%}
+                      <tr>
+                          <td><a href="/ShowDevDrive/" >{{noti.message}} on {{noti.created_on}}</a></td>
+                       </tr>
+                    {% empty %}
+                       <tr>
+                          <td><a> No Notiications. Your notifications reflect here.</a></td>
+                       </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Graphical representation of your Activity on this site.</h4>
+      <p>The value which is displayed when toggled on blue marks has some meaning.
+         The value is called weight and check below table to know what each weight value.</p>
+       <table>
+           <tr>
+               <th> Weight </th>
+               <th> meaning </th>
+           </tr>
+           <tr>
+               <td> 10 </a></td>
+               <td>Logged in</td>
+           </tr>
+           <tr>
+               <td> 20 </a></td>
+               <td> Asked a Question</td>
+           </tr>
+           <tr>
+               <td> 30 </a></td>
+               <td>Answered a Question</td>
+           </tr>
+           <tr>
+               <td> 40 </a></td>
+               <td>Added a tutorial</td>
+           </tr>
+
+       </table>
+     <h3>Powered By Google Charts</h3>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-green btn-flat" data-target="modal2">cancel</a>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+      google.charts.load("current", {packages:["calendar"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'tooltip' });
+       dataTable.addRows([
+          // Many rows omitted for brevity.
+
+          [ new Date(2020, 11, 4), 1 ],
+          {% for ans_date in Ans_dates%}
+          [ new Date({{ans_date.year}}, {{ans_date.month|add:"-1"}} , {{ans_date.day}}), 30 ],
+          {%endfor%}
+          {% for q_date in Question_dates%}
+          [ new Date({{q_date.year}}, {{q_date.month|add:"-1"}}, {{q_date.day}}), 20 ],
+          {%endfor%}
+          {% for t_date in Tut_dates%}
+          [ new Date({{t_date.year}}, {{t_date.month|add:"-1"}}, {{t_date.day}}), 40 ],
+          {%endfor%}
+          {% for l_date in Login_dates%}
+          [ new Date({{l_date.year}}, {{l_date.month|add:"-1"}}, {{l_date.day}}), 10 ],
+          {%endfor%}
+        ]);
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+       var options = {
+         title: "Activity",
+         height: 200,
+       };
+
+       chart.draw(dataTable, options);
+   }
+</script>
+<script>
+window.onload = function(){
+  M.toast({html: 'welcome to 🅰🅱🅴🅽🅳' })
+}
+</script>
+
+{% endblock content %}

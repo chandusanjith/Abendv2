@@ -1,0 +1,176 @@
+
+{% load static %}
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>For Developers by a Developer</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+        <meta name="author" content="templatemo">
+        <!-- 
+        Lavish HTML CSS Template
+        https://templatemo.com/tm-458-lavish
+        -->
+        
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- animate -->
+		<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<!-- Materilize css -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!-- font-awesome -->
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+		<!-- google font -->
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700,800' rel='stylesheet' type='text/css'>
+		<!-- fullpage -->
+		<link rel="stylesheet" href="{% static 'css/jquery.fullPage.css' %}">
+		<!-- custom -->
+		<link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+
+	</head>
+	<body>
+
+	<div id="fullpage" style="background:black;">
+		<!-- start home -->
+		<div id="home" class="section">
+			<div class="row">
+				<div class="col s6 ">
+                     <div class="card z-depth-5 hoverable transparent">
+						  <div class="card-content">
+							  <center><h2 class="black">🅰🅱🅴🅽🅳</h2></center>
+							  <center><h1 class="black small">The best place to build your programing skills</h1></center>
+							  <center><h4> Usefull for :</h4></center>
+							  <center><h5 class="rotate">DESIGNER &AMP; DEVELOPER, MANAGERS, HUMAN RESOURCE, FUNCTIONAL HEADS , TEAM LEADER</h5></center>
+						  </div>
+					 </div>
+				 </div>
+				 <div class="col s6 ">
+					 <div class="card z-depth-5 hoverable transparent">
+					 <div class="card-content">
+					 <div id="login">
+						 <form action = "/" method = "POST"> {% csrf_token %}
+						 <div class="form-container">
+							  {% if messages %} {% for message in messages %}
+							  <h6 class="red-text">{{message}}</h6>
+							 {% endfor%}{% endif %}
+							 <h3 style=color:#D43F52;>Login</h3>
+							     <div class="row">
+									  <div class="input-field col s12">
+						                   <input id="userid" name="uname" type="text" class="validate" required>
+						                   <label for="userid">UserID</label>
+					                  </div>
+								  </div>
+							  <div class="row">
+					              <div class="input-field col s12">
+						              <input id="password" name="psw" type="password" class="validate" required>
+						              <label for="password">Password</label>
+					               </div>
+				              </div>
+				              <center>
+					               <button class="btn waves-effect waves-light white-text" type="submit" style=color:#D43F52; name="action">Login</button>
+				              </center>
+			              </div>
+						 </form>
+						 <form action = "/Signup/" method = "GET"> {% csrf_token %}
+						 <center>
+							 <button class="btn-small waves-effect waves-light white-text "  type="submit">Signup?</button>
+						 </center>
+						 </form>
+					 </div></div></div>
+
+				<!--<form action = "/" method = "POST"> {% csrf_token %}
+					<div class="col-md-6 wow fadeIn" data-wow-delay="0.9s">
+						<h2>Login to continue</h2>
+                        <input id="text" type="text" name="uname" class="validate" placeholder="UserID">
+                        <input id="password" type="password" name="psw"  class="validate" placeholder="password">
+					    <button class="waves-effect waves-light btn" type="submit" >LOGIN</button>
+					</div>
+					</form> -->
+
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+		</div>
+		<!-- end home -->
+
+		<!-- start work -->
+		<div id="work" class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 wow bounce">
+						<h2> HOW THIS APPLICATION HELPS YOU</h2>
+					</div>
+                </div>  
+                
+                <div class="row">
+					<div class="col-md-8 col-xs-11 wow fadeInUp" data-wow-delay="0.6s">
+						<div class="media">
+							<div class="media-object media-left">
+								<i class="fa fa-laptop"></i>
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Learn & Discover</h3>
+								<p>Just starting out? Browse, Ask questions to your senior developers which helps in learning and code faster.</p>
+							</div>
+						</div>
+					</div>
+                    
+					<div class="col-md-8 col-xs-11 wow fadeInUp" data-wow-delay="0.6s">
+						<div class="media">
+							<div class="media-object media-left">
+								<i class="fa fa-link"></i>
+							</div>
+							<div class="media-body">
+								<h3 class="media-heading">Share Your Work</h3>
+								<p>Become a part of this community by sharing work. Write a Tutorial. Show your code directly in the browser and earn more likes from senior developers.</p>
+						</div>
+					</div>
+                    
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- end contact -->
+
+		<!-- start footer -->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 wow fadeIn" data-wow-delay="0.9s">
+						<p>Copyright &copy; 2020 Commercial Dev</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end footer -->
+		</div>
+	</div>
+
+		<!-- jQuery -->
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<!-- bootstrap -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<!-- fullpage -->
+		<script src="{% static 'js/jquery.fullPage.js' %}"></script>
+		<!-- smoothScroll -->
+		<script src="{% static 'js/smoothscroll.js' %}"></script>
+		<!-- wow -->
+		<script src="{% static 'js/wow.min.js' %}"></script>
+		<!-- text rotater -->
+		<script src="{% static 'js/jquery.simple-text-rotator.js' %}"></script>
+		<!-- custom -->
+		<script src="{% static 'js/custom.js' %}"></script>
+
+	</body>
+</html>

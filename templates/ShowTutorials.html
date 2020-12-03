@@ -1,0 +1,73 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>Tutorials</title>
+</head>
+<div class="row">
+    <br>
+    <form action="/SearchTutorial/" method="post">{% csrf_token %}
+        <div class="col s10 push-s2">
+            <h5><b>Search for tutorials:</b></h5>
+          <div class="input-field inline col s6">
+            <input id="search_inline" type="text" name = "query" class="validate">
+            <label class="black-text" for="search_inline">search<i class="material-icons black-text left">search</i></label>
+          </div><br>
+            <button class="btn-small waves-effect waves-light black  " id= "submitanswer" type="submit"><i class="material-icons right">search</i>Search</button>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col s4 push-s2">
+    <h4><b>Tutorials</b>&emsp;</h4>
+    </div>
+    <!--<form action = "/ShowTutorials/" method="POST">{% csrf_token %}
+    <div class="col s4">
+        <div class="input-field col s12">
+    <select name="filter">
+        <option value="" disabled selected><b>Filter</b></option>
+      <option value="1" >New first</option>
+      <option value="2">Most Viewed</option>
+      <option value="3">Most Liked</option>
+    </select>
+  </div>
+    </div><br>
+        <button class="small btn-small waves-effect waves-light black" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Apply Filter</button>
+    </form>-->
+</div>
+<div class="row">
+<div class="col s10 push-s2">
+      <div id="card-container" class="row">
+        <!-- Col: Card 1 -->
+          {% for tdata in Tutorials %}
+        <div class="col s12 m6">
+          <!-- Card 1 -->
+          <div class="card hoverable ">
+            <div class="card-content white-text">
+              <span class="new badge red" data-badge-caption="Hot">{{tdata.claps}}</span>
+              <span class="new badge Green" data-badge-caption="Views">{{tdata.views}}</span>
+                <a href = "/DispTutorial/{{tdata.slug}}/"><b>{{tdata.title|truncatewords:6}}</b></a>
+            </div>
+            <div class="card-action">
+             {% for tags in tdata.tags.all %}
+                {% if forloop.counter <= 2 %}
+                    <span class="new badge black" data-badge-caption={{tags}}></span>{% endif %}
+             {% endfor %}
+             <h8> Created on {{tdata.created_on}} by </h8><a href="/OpenProfile/{{tdata.author}}/">{{tdata.author}}</a>
+            </div>
+          </div>
+          <!-- End of card -->
+        </div>
+          {% empty %}
+          <div class="row">
+             <div class="col s10 push-s2">
+             <h2>Sorry!! no results found :(</h2>
+          </div></div>
+          {% endfor %}
+        <!-- End of col -->
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

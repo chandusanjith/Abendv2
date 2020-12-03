@@ -1,0 +1,69 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+{% if messages %} {% for message in messages %}
+<body onload="myFunction()">
+{% endfor %}{% endif %}
+<div class="container">
+    <h3>TODO</h3>
+</div>
+<div class="container">
+    <div class="card z-depth-5 hoverable">
+        <div class="card-content">
+            <div class="row">
+            <div class="input-field col s2">
+                <button class="btn waves-effect waves-light left modal-trigger" data-target="modal1"  type="submit">Add Task</button>
+            </div>
+            <div class="input-field col s2">
+                <button class="btn waves-effect waves-light left modal-trigger black-text grey lighten-3" data-target="modal2" name="task" id= "submitcat" type="submit">Add Section</button>
+            </div>
+                <br>
+                <br>
+                <br>
+              <div class="divider"></div>
+                      <ul class="collection with-header">
+                        <li class="collection-header"><h4>First Names</h4></li>
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                      </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------------>
+  <!-- Modal Structure -->
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+<script>
+{% if messages %} {% for message in messages %}
+function myFunction() {
+  alert("{{ message }}");
+}
+{% endfor %}{% endif %}
+</script>
+{% endblock content%}

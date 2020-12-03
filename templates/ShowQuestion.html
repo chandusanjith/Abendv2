@@ -1,0 +1,236 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+img {
+    display: block;
+    max-width:1050px;
+    max-height:1100px;
+    width: auto;
+    height: auto;
+}</style>
+
+<head>
+    {% for full_q in full_question %}
+    <title>{{ full_q.title}}</title>
+    {%endfor%}
+</head>
+
+<div class ="row">
+    {% for full_q in full_question %}
+      <div class="col s10 push-s2">
+          {% if full_q.isclosed == True %}
+          <h2 class="header"><b>{{ full_q.title}} [Closed] </b></h2>
+          {%endif%}
+          {% if full_q.isclosed == False %}
+          <h2 class="header"><b>{{ full_q.title}}</b></h2>
+          {%endif%}
+          <h5>Asked: {{full_q.created_on }}, Viewed: {{full_q.views }} times</h5>
+          {% if full_q.isclosed == True %}
+          <div class="card horizontal grey lighten-2 transparent">
+              <div class="card-stacked">
+                  <div class="card-content">
+                     <div class="row">
+                        <div class="col s2">
+                           <h4>🅰🅱🅴🅽🅳</h4>
+                        </div>
+                        <div class="s5">
+                            <h5><center><b>Our ML Algorithms Detected Your Question As SPAM!!</b></center></h5>
+                            <li class="divider black"></li>
+                            <h8><center><b>Users Cannot Add Answers or Like Your Post.Question Will Be Deleted In A Day Or Two.</b></center></h8>
+                            <li class="divider black"></li>
+                            <h8><center>Not Spam? Contact Admin To Review Your Question Manually And Make It Open.</center></h8>
+                        </div>
+                     </div>
+                  </div>
+              </div>
+          </div>
+             {% endif %}
+
+    <div class="card horizontal z-depth-5 ">
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Owner:</b></h6>
+            <div class="chip">
+                <img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person"><a href="/OpenProfile/{{full_q.author}}/">{{full_q.author}}</a>
+            </div>
+            <li class="divider black"></li>
+            <p>&nbsp;</p>
+            <h6><b>Question: </b></h6><br>
+            {{ full_q.body | safe }}
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <li class="divider black"></li>
+             <p>&nbsp;</p>
+            <h6><b>Tags:</b></h6><br>
+            {% for tags in full_q.tags.all %}
+            <span class="new badge black left" data-badge-caption={{tags}}></span>
+            {% endfor %}
+
+        </div>
+          {% if full_q.isclosed == False %}
+        <div class="card-action" id="likediv">
+          {% include 'Ajax_powered/likesdislikes.html' %}
+        </div>
+          {% endif%}
+          <div id="modal2" class="modal">
+     <div class="modal-content">
+      <h4>Alert!! </h4>
+      <p>Are you sure want to delete?</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-green btn-flat" data-target="modal1">cancel</a>
+      <a href="{% url 'DeleteQuestion' full_q.slug %}" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div></div>
+  <div id="modal3" class="modal">
+         <div class="modal-content">
+      <h4>Alert!! </h4>
+      <p>Question cannot be deleted as some developers has spent time to answer your question.</p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-green btn-flat" data-target="modal3">Agree</a>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+          {% endfor %}
+
+    <div id="AcceptAnswerDiv">
+        {% include 'Ajax_powered/AcceptAnswer.html' %}
+    </div>
+    <br>
+    <div class="col s10 push-s2">
+    {% for full_q in full_question %}
+    {% if full_q.isclosed == False %}
+    <h5>Add Answer</h5>
+          {% for full_q in full_question %}
+    <form action = "/AddAnswer/{{ full_q.slug }}" method = "POST">{% csrf_token %}
+        {% endfor %}
+                                {{ form.media }}
+                                {{ form }}
+    <br>
+        <br>
+    <button class="btn waves-effect waves-light left black pulse" id= "submitanswer" type="submit">Add Answer
+        <br>
+        <br>
+    </button></form>
+    {% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#like', function(event){
+    event.preventDefault();
+    var catid;
+    catid = $(this).attr("value");
+    var istut;
+    istut = $(this).attr("istut");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AddLike/",
+        data:{
+                 'post_id': catid,
+                 'istut': istut,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#likediv').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#dislike', function(event){
+    event.preventDefault();
+    var catid;
+    catid = $(this).attr("value");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AddDisLike/",
+        data:{
+                 'post_id': catid,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#likediv').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#acceptanswer', function(event){
+    event.preventDefault();
+    var catid;
+    catid = $(this).attr("value");
+    var qid;
+    qid = $(this).attr("value2");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/AcceptAnswer/",
+        data:{
+                 'post_id': catid,
+                 'qid':qid,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#AcceptAnswerDiv').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#DeleteAnswerButton', function(event){
+    event.preventDefault();
+    var id;
+    var slug;
+    var tut;
+    id = $(this).attr("value1");
+    slug = $(this).attr("value2");
+    tut = $(this).attr("value3");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/DeleteAnswer/",
+        data:{
+                 'id': id,
+                 'slug':slug,
+                 'tut':tut,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#AcceptAnswerDiv').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+<script>
+    $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+{% endblock content %}

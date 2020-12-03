@@ -1,0 +1,25 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <br>
+    <h4>API</h4>
+    <divider></divider>
+    <h4>About Raw Data</h4>
+    <p>Raw data is split into multiple files. You can regenerate the full raw data by merging the following files</p>
+    <br>
+    <br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s10 push-s2">
+      <div class="collection">
+        <a href="http://127.0.0.1:8000/RawData/Questions/" class="collection-item">http://127.0.0.1:8000/RawData/Questions/</a>
+        <a href="http://127.0.0.1:8000/RawData/Answers/" class="collection-item">http://127.0.0.1:8000/RawData/Answers/</a>
+      </div>
+    </div>
+</div>
+{% endblock content%}

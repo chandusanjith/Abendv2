@@ -1,0 +1,14 @@
+            {% for full_t in FullTutorial %}
+            {% if clap_status == True %}
+            <a value1="{{full_t.slug}}" value2="T" id="hot" class="btn-floating btn-small  waves-effect waves-light red tooltipped"  data-position="right" data-tooltip="You marked this as HOT"><i class="material-icons blue-text">whatshot</i></a>
+            {% endif %}
+            {% if clap_status == False %}
+            <a value1="{{full_t.slug}}" value2="T" id="hot" class="btn-floating btn-small waves-effect waves-light black pulse tooltipped"  data-position="right" data-tooltip="Mark this as HOT"><i class="material-icons ">whatshot</i></a>
+            {% endif %}
+            <b>{{full_t.claps}} People marked this tutorial as</b><b class="red-text"> HOT TOPIC</b>
+           <h8 class ="heading right"> Written on {{ full_t.created_on }} by <a href="/OpenProfile/{{full_t.author}}/">{{full_t.author}}</a></h8>
+            {% if user == full_t.author %}
+            <a href="/DeleteTutorial/{{full_t.id}}/" class="right">Delete Tutorial</a>
+            <a href="/EditTutorial/{{full_t.slug}}/" class="right">Edit Tutorial</a>
+            {% endif %}
+            {% endfor %}

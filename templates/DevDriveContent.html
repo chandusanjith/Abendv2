@@ -1,0 +1,109 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>{{user}}'s DevDrive</title>
+</head>
+<div class="row">
+    <div class="col s10 push-s2">
+        <h3><b>Your DevDrive</b> </h3>
+    <br>
+    </div>
+</div>
+{% if messages %} {% for message in messages %}
+<body onload="myFunctionMessage()"></body>
+{% endfor %}{% endif %}
+<form action="/ShowDevDrive/" method="Post"> {% csrf_token %}
+<div class="container">
+     <div class="row">
+         <div class="col s8 push-s1">
+              <div class="row">
+                   <div class="input-field col s6">
+                        <select name="folder">
+                         <option value="All">All</option>
+                         <option value="Shared_with_me">Shared with me</option>
+                        {% for fold in folders %}
+                        <option value="{{fold.folder}}">{{fold.folder}}</option>
+                        {% endfor %}
+                        </select>
+                        <label>Select Folder</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <button  class="waves-effect waves-light black btn" type="submit"><i class="material-icons right">get_app</i>Fetch</button>
+                    </div>
+              </div>
+         </div>
+     </div>
+</div>
+</form>
+<div class="row">
+    <div class="col s10 push-s2">
+    {% if result == "All" %}
+        <h6 class="title"><b>All files</b></h6>
+    {% endif %}
+    {% if result != "All" %}
+        <h6 class="title"><b>Folder: {{ result }}</b></h6>
+    {% endif %}
+    <div class="card hoverable transparent">
+        <div class="card-content transparent">
+
+            {% for file in files reversed %}
+           <ul class="collection">
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">folder</i>
+                    <span class="title">File: {{file.file}}</span>
+                    <p>Title: {{file.title}}<br>
+                        Discription: {{file.Description}}<br>
+                        Shared with: {% for users in file.download_rights.all%} {{ users }} {% if users is  None %}None{% endif %}{% endfor %}
+                    </p>
+                    <a href="/DownloadFile/{{file.id}}/"  class="waves-effect waves-light green btn"><i class="material-icons right">cloud_download</i>Download</a>
+                    {% if file.owner == user %}
+                    <a href="/DeleteFile/{{file.id}}/"  class="waves-effect waves-light red btn"><i class="material-icons right">delete_forever</i>Delete</a>
+                    <a href="#modal2" onclick='localStorage.setItem("DocId", "/ShareFile/{{file.id}}/");' class="waves-effect waves-light btn modal-trigger chandu" ><i class="material-icons right">share</i>Share</a>
+                    {% endif %}
+                    <h8 class ="heading right"> Uploaded on {{ file.Uploaded_on }} </h8>
+                </li>
+              <div id="modal2" class="modal"  style="height:600;">
+                  <form id = "myform" method = "POST">{% csrf_token %}
+                  <div class="modal-content">
+                      <div id="result"></div>
+                       <div class="input-field">
+                           <select searchable='Search users' name="sharenames" id="xxxx" multiple required>
+                               {% for user_all in users %}
+                               {% if user_all != user %}
+                               <option value="{{user_all.id}}">{{user_all}}</option>
+                               {% endif %}
+                               {% endfor %}
+                           </select>
+                           <label> Select users you want to share this file with</label>
+                       </div>
+                      <button class="btn waves-effect waves-light black right"  onclick="get_action(this);" id= "submitanswer" type="submit"><i class="material-icons right">share</i>Share
+                      </button>
+                      <br>
+                  </div>
+                  </form>
+              </div>
+           </ul>
+            {% empty %}
+            <h1>No Data Found</h1>
+            <img class="responsive-img" src="{% static 'images/notfound.gif' %}">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+<script>
+function myFunctionMessage() {
+ {% for message in messages %}
+  alert("{{message}}");
+  {% endfor %}
+}
+</script>
+
+<script type="text/javascript">
+function get_action() {
+   document.getElementById('myform').action = localStorage.getItem("DocId");
+}
+</script>
+
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>Activity</title>
+</head>
+
+<div class="row">
+    <div class="col s10 push-s2">
+    <h3>Download your activity in XLS format ?</h3>
+    </div>
+</div>
+<div class="row">
+    <form class="col s12 push-s2" method = "POST" action="/ActivityQuery/">  {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s2">
+                            <input placeholder="From Date *" name="f_date" id="from_date" type="text" class="datepicker" required>
+                            <label for="from_date" class="purple-text">From Date *</label>
+                        </div>
+                        <div class="input-field col s2">
+                            <input placeholder="To Date *" id="to_date" name="t_date" type="text" class="datepicker" required>
+                            <label for="to_date" class="purple-text">To Date *</label>
+                        </div>
+                        <div class="input-field col s2">
+                        <button class="btn waves-effect waves-light  black" name="Download" id= "submitans" type="submit">  Downlod</button>
+                        </div>
+                        <!--<div class="input-field col s2">
+                        <button class="btn waves-effect waves-light right" name="Sendtotl"  id= "submitan" type="submit">Send to TL</button>
+                        </div>-->
+                    </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col s10 push-s2">
+    <h3>Your Activity</h3>
+    </div>
+</div>
+<div id="DelAct">
+    {% include 'Ajax_powered/ShowActivityAjax.html'  %}
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click','#DeleteActivityButton', function(event){
+    event.preventDefault();
+    var id;
+    id = $(this).attr("value");
+    $.ajax(
+    {
+        type:'POST',
+        url: "/DeleteActivity/",
+        data:{
+                 'id': id,
+                 'csrfmiddlewaretoken': '{{csrf_token}}'
+        },
+        dataType: 'json',
+        success: function( response )
+        {
+            $('#DelAct').html(response['form']);
+        }
+     })
+    })
+});
+</script>
+
+{% endblock content%}

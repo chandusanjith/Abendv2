@@ -1,0 +1,109 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col s10 push-s2">
+    <br>
+    <br>
+        <h4 class="header"><b>Save files to DevDrive</b></h4>
+    <br>
+    <br>
+    </div>
+</div>
+{% if messages %} {% for message in messages %}
+<body onload="myAlert()"></body>
+{% endfor %}{% endif %}
+<form action = "/DevDrive/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+<div class ="row">
+    <div class="col s10 push-s2">
+    <div class="card horizontal hoverable">
+      <div class="card-stacked">
+        <div class="card-content">
+             <div id="id1" style="display:none" class="progress">
+                 <div class="indeterminate"></div>
+             </div>
+          <div class="row">
+            <div class="col s12">
+               <div class="row">
+                   <div class="input-field col s6">
+                   <select name="folder">
+                        {% for fold in folders %}
+                        <option value="{{fold.folder}}">{{fold.folder}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Select Folder</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <a href="#modal2" class="waves-effect waves-light black btn modal-trigger"><i class="material-icons right">create_new_folder</i>New...</a>
+                    </div>
+                   <br><br>
+                 <div class="input-field col s12">
+                 <input type="text" id="title1" name="title" class="autocomplete" required>
+                   <label for="title1">
+                    Title</label>
+                 </div>
+                   <br>
+                    <br>
+                    <br>
+                    <br> <br><br><br>
+                 <div class = "file-field input-field">
+
+                  <div  class = "btn right black"><i class="material-icons right">open_in_browser</i><span>Browse</span>
+                     <input type = "file" name="user_file" required>
+                  </div>
+                     <div class = "file-path-wrapper">
+                     <input class = "file-path validate"  type = "text"
+                        placeholder = "Upload file" required>
+                  </div>
+               </div>
+                 <br>
+                 <div class="input-field col s12">
+                 <input type="text" id="input_disc" name="disc" class="autocomplete" required>
+                   <label for="input_disc">Discription</label>
+                 </div>
+                <br><br><br><br><br>
+	            <div class="input-field col s12">
+                <select searchable='Search users' name="sharenames" id="xxxx" multiple>
+                    {% for user_all in users %}
+                    {% if user_all != user %}
+                    <option value="{{user_all.id}}">{{user_all}}</option>
+                    {% endif %}
+                    {% endfor %}
+               </select>
+                    <label> Select users you want to share this file with</label>
+              </div>
+                 <button class="btn waves-effect waves-light black left pulse"  onclick = "show()" id= "submitanswer" type="submit"><i class="material-icons right">send</i>Submit
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div>
+</div>
+</form>
+<form action="/AddFolder/" method = "POST">{% csrf_token %}
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <div class="input-field">
+            <input type="text" id="input_folder" name="folder" class="autocomplete" required>
+            <label for="input_folder">Folder Name</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+         <button class="waves-effect waves-light black btn"><i class="material-icons right">create_new_folder</i>Add</button>
+    </div>
+</div>
+</form>
+<script>
+    function show() {
+      document.getElementById('id1').style.display = "block";
+    }
+</script>
+<script>
+function myAlert() {
+  alert("File added to drive");
+}
+</script>
+<script src="{% static 'js/dropselect.js' %}"></script>
+{% endblock content %}

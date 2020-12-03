@@ -1,0 +1,121 @@
+    body {
+    background-color : #f1f8e9;
+    background-image: url('../images/gitfinal.svg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right top;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+body.dark {
+  background-color: #202123;
+  color: #fff;
+}
+
+body.dark .navbar-fixed {
+   background-color: #202123;
+   color: #fff;
+}
+
+body.dark .input-field [type=text] {
+     color:white;
+}
+
+body nav {
+  background-color: white;
+   color: black;
+}
+
+body.dark nav {
+  background-color: #2D2D31;
+   color: white;
+}
+
+body.dark nav li a .material-icons {
+  color: white;
+}
+
+body.dark nav li a .text {
+  color: white;
+}
+
+body.dark .card {
+  background-color:  #424242;
+}
+
+body.dark collapsible {
+   background-color:  black;
+}
+
+body.dark .divider {
+  opacity: 0.2;
+}
+
+body.dark .modal {
+ background-color: #202123;
+  color: #fff;
+}
+
+body.dark .modal-footer {
+ background-color: #202123;
+  color: #fff;
+}
+
+body.dark .sidenav {
+  background-color: #2D2D31;
+}
+body.dark .sidenav li a:not(.subheader) {
+  color: #89B2F5;
+}
+body.dark .sidenav li a:not(.subheader):hover {
+  background-color: #3B4043;
+}
+body.dark .sidenav li a.subheader {
+  color: #9AA0A6;
+}
+body.dark .sidenav li a .material-icons {
+  color: #9AA0A6;
+}
+body.dark .collection {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+body.dark .collection-header {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark .collection .collection-item {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+footer.dark .footer-copyright {
+   background-color: #202123 !important;
+   color: #fff !important;
+}
+
+#myFooter {
+       background-color: grey lighten 3 !important;
+}
+
+#myFooter.dark {
+       background-color:#202123  !important;
+       color: #fff !important;
+}
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #bdbdbd ;
+
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+  main {
+    flex: 1 0 auto;
+  }

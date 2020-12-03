@@ -1,0 +1,306 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+<style>
+img:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+</style>
+<div class="row">
+    <div class="col s10 push-s2">
+        <br>
+        <center><h4><b>Welcome to Abend</b></h4></center>
+        <center><h4>🅰🅱🅴🅽🅳</h4></center>
+        <br><br>
+        <center><b>Just starting out? Browse, Ask questions to your senior developers which helps in learning and code faster.Become a part of this application by sharing work. Write a Tutorial. Show your code directly in the browser and earn more likes, reputation from senior developers.</b></center>
+        <br>
+        <li class="divider"></li>
+        <center><h4><b>Ask questions, get answers within C-Edge</b></h4></center>
+        <br>
+        <br>
+        <div class="col s3">
+            <h6><b>This site is all about getting answers. It's not a discussion forum. There's no chit-chat.</b></h6>
+            <br>
+            <br>
+            <h5> Just Questions.....<i class="Medium material-icons orange-text">arrow_forward</i></h5>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h5>..... and Answers<i class="Medium material-icons orange-text" >arrow_forward</i></h5>
+        </div>
+        <div class="col s9">
+            <img class="responsive-img z-depth-5" src="{%  static 'images/qa.png' %}" id="top">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>UpVotes, DownVotes, Accept Answer</b></h4></center>
+        <br>
+        <br>
+        <div class="col s3">
+            <img class="responsive-img z-depth-5" src="{%  static 'images/symbols.png' %}">
+        </div>
+        <div class="col s9">
+            <h6><b><i class="Medium material-icons orange-text" >arrow_back</i>Good Questions are voted up.</b></h6>
+            <br>
+            <br>
+            <h6><b><i class="Medium material-icons orange-text" >arrow_back</i>The person who asked can mark one answer as "accepted".</b></h6>
+            <center>Accepting doesn't mean it's the best answer, it just means that it worked for the person who asked.</center>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Tags are very important, which helps in search based on subject.</b></h4></center>
+        <br>
+        <br>
+        <div class="col s6">
+            <img class="responsive-img z-depth-5" src="{%  static 'images/tags.png' %}">
+        </div>
+        <div class="col s6">
+            <p>&nbsp;</p>
+            <h6><b><i class="Medium material-icons orange-text" >arrow_back</i>All questions are tagged with their subject areas.</b></h6>
+            <center>Don't forget to add tags while asking a question and tutorials.</center>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>You earn reputation when you ask a question, add answers and when people vote your question</b></h4></center>
+        <br>
+        <br>
+        <div class="col s4">
+           <table>
+                <thead>
+                <tr>
+                    <th> Reputation </th>
+                    <th> Privilege </th>
+                </tr>
+                </thead>
+                    <tbody>
+                      <tr>
+                          <td>10</td>
+                          <td>Add a Tutorial</td>
+                       </tr>
+                      <tr>
+                          <td>5</td>
+                          <td>Add a question</td>
+                       </tr>
+                       <tr>
+                          <td>2</td>
+                          <td>Write a answer</td>
+                       </tr>
+                    <tr>
+                          <td>1</td>
+                          <td>Answer accepted</td>
+                       </tr>
+                    </tbody>
+                </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </div>
+        <div class="col s8">
+            <img class="responsive-img z-depth-5" src="{%  static 'images/repu.png' %}">
+        </div>
+        <div class="col s12">
+           <ul class="collapsible yellow lighten-4 black-text">
+            <li>
+                <div class="collapsible-header yellow lighten-4"><i class="material-icons black-text">filter_drama</i><b class="black-text">Click to check Privilege to earn Badges </b></div>
+               <div class="collapsible-body black-text">
+                   <table class="black-text">
+                <thead>
+                <tr>
+                    <th> Reputation </th>
+                    <th> Badge </th>
+                </tr>
+                </thead>
+                    <tbody>
+                    {% for badg in badges %}
+                      <tr>
+                          <td>{{badg.Rep_required}}</td>
+                          <td class="chip" ><img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person">{{badg.Badge_name}}</td>
+                       </tr>{% endfor %}
+                    </tbody>
+                </table>
+               </div>
+            </li>
+            </ul>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Asking a question</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s4">
+            <h8><b>Title should be specific to subject.<i class="Medium material-icons orange-text" >arrow_forward</i></b></h8>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <h8><b>Question can be added in this editor.<i class="Medium material-icons orange-text" >arrow_forward</i></b></h8>
+            <h8>Question can contain images, links, forms, buttons and much more.</h8>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <h8><b>Question should be tagged.<i class="Medium material-icons orange-text" >arrow_forward</i></b></h8><br>
+            <h8>Question should be tagged with it's subject area.</h8>
+        </div>
+
+        <div class="col s8">
+            <img class="responsive-img z-depth-5" src="{%  static 'images/askq.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Rich Text Editor</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s12">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/ckeditor.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <div class="col s12">
+            <h3><b>Rich text editor features</b></h3>
+            <div class="col s6">
+                <h5><b>Paste from Word, Excel and Google Docs</b></h5>
+            <h6>Excellent tables support with columns resizing, selecting rows and columns.</h6>
+            </div>
+            <div class="col s6">
+                <h5><b>Autocomplete</b></h5>
+            <h6>@mentions, emoji 😊 plugins.</h6>
+                <br>
+            </div>
+            <div class="col s6">
+                <h5><b>Media embeds</b></h5>
+            <h6>(insert videos, tweets, Instagram posts and more), widgets, code snippets, math formulas.</h6>
+            </div>
+            <div class="col s6">
+                <h5><b>Inline and iframe UI</b></h5>
+            <h6> autogrow, maximize mode for distraction-free writing. Read-only mode.</h6>
+            </div>
+             <div class="col s6">
+                 <h5><b>Media embeds</b></h5>
+            <h6>for creating data grids inside the editor.</h6>
+            </div>
+            <div class="col s6">
+                <h5><b>Styling</b></h5>
+            <h6> Various styling and formatting plugins, copy formatting feature.</h6>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Mark tutorial as HOT topic</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s4">
+            <br>
+            <br>
+            <h6><b>Mark the tutorials which you liked as hot topic so that it will show in the top and reach maximum users.</b></h6>
+            <i class="Medium material-icons orange-text right" >arrow_forward</i>
+        </div>
+        <div class="col s8">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/hot.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Comments and Likes</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s4">
+            <br>
+            <p>&nbsp;</p>
+            <h6><b>Comments can be added to the tutorial, users can discuss about the tutorial here.</b></h6>
+            <i class="Medium material-icons orange-text right" >arrow_forward</i>
+            <br>
+            <br>
+            <br>
+            <i class="Medium material-icons orange-text right" >arrow_forward</i>
+            <h6><b>Comments can be liked, disliked by other users.</b></h6>
+            <br>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <h6><b>You can add comments here<i class="Medium material-icons orange-text right" >arrow_forward</i></b></h6>
+        </div>
+        <div class="col s8">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/clikes.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Want to use our backend ?</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s12">
+            <h5><b>Want to develop an android, ios app ?</b></h5>
+            <h6>Our application backend can be communicated with Restful API, go ahead develop an Android, ios, React apps and use our backend.</h6>
+        </div>
+        <p>&nbsp;</p>
+        <div class="col s12">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/rest.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Toggle between Dark/Light themes (Beta) </b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s6">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/light.png' %}">
+        </div>
+        <div class="col s6">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/dark.png' %}">
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <li class="divider"></li>
+        <br>
+        <center><h4><b>Add files to DevDrive and share it with others.</b></h4></center>
+        <p>&nbsp;</p>
+        <div class="col s4">
+            <br><br>
+            <h6><b class="right">Select or create a folder<i class="material-icons orange-text right" >arrow_forward</i></b></h6>
+            <br><br>
+            <h6><b class="right">Give title relevant to files<i class="material-icons orange-text right" >arrow_forward</i></b></h6>
+            <br><br><br>
+            <h6><b class="right">Select local file <i class="material-icons orange-text right" >arrow_forward</i></b></h6>
+            <br><br><br>
+            <h6><b class="right">Describe the file you are uploading<i class="material-icons orange-text right" >arrow_forward</i></b></h6>
+            <br><br>
+            <h6><b class="right">Select the users you want to share with, if none leave blank.<i class="material-icons orange-text right" >arrow_forward</i></b></h6>
+        </div>
+        <div class="col s8">
+            <img class="responsive-img z-depth-5"   src="{%  static 'images/dev.png' %}">
+        </div>
+    </div>
+</div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+</script>
+{% endblock content%}

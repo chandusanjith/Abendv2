@@ -1,0 +1,39 @@
+{% load static %}
+{% if comment != " " %}
+          <h2>Comments</h2>
+              {% for full_ans in comment %}
+    <div class="card horizontal z-depth-2 hoverable ">
+      <div class="card-stacked">
+        <div class="card-content">
+            <div class="chip">
+                <img src="{% static 'images/portfolio-img1.jpg' %}" alt="Contact Person"><a href="/OpenProfile/{{full_ans.author}}/">{{full_ans.author}}</a>
+            </div>
+            <li class="divider black"></li><br>
+            {{ full_ans.body }}
+
+        </div>
+        <div class="card-action">
+            {% for full_t in FullTutorial %}
+             {% if full_ans in Liked_list %}
+               <a  class="btn-floating btn-small  waves-effect waves-light black " id="like"  value ="{{ full_ans.id }}" slug="{{full_t.slug}}"><i class="material-icons blue-text">thumb_up</i></a>
+             {% else %}
+               <a  class="btn-floating btn-small  waves-effect waves-light black pulse " id="like"  value ="{{ full_ans.id }}" slug="{{full_t.slug}}"><i class="material-icons">thumb_up</i></a>
+            {% endif %}
+            <b>{{ full_ans.likes}}</b>
+            {% if full_ans in DisLiked_list %}
+            <a class="btn-floating btn-small waves-effect waves-light black " id="dislike" value ="{{ full_ans.id }}" slug="{{ full_t.slug }}"><i class="material-icons blue-text">thumb_down</i></a>
+            {% else %}
+            <a class="btn-floating btn-small waves-effect waves-light black" id="dislike" value ="{{ full_ans.id }}" slug="{{ full_t.slug }}"><i class="material-icons">thumb_down</i></a>
+            {% endif %}
+            <b>{{ full_ans.dislikes }}</b>
+            <!--<a class="btn-floating btn-small waves-effect s3 c14 waves-light black"><i class="material-icons">spa</i></a>-->
+           <h8 class ="heading right"> Commented on  {{full_ans.updated_on}} by <a href="/OpenProfile/{{full_ans.author}}/">{{full_ans.author}}</a></h8>
+            {% if user == full_ans.author %}
+            <a class="right" id="DeleteComment" value1="{{full_ans.id}}" value2= "{{ full_ans.question_slug }}" value3="T">Delete Comment</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+          {% endfor %}
+          {% endif %}
