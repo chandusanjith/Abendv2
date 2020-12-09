@@ -37,11 +37,11 @@ And of course ABEND itself is open source with a [public repository][ABEND]
 
 ### Installation
 
-1-> go to the project folder
-2-> run pip install -r requirements.txt
-3-> run python manage.py makemigrations core
-4-> run python manage.py migrate
-5-> then python manage.py runserver.
+1. go to the project folder
+2. run pip install -r requirements.txt
+3. run python manage.py makemigrations core
+4. run python manage.py migrate
+5. then python manage.py runserver.
 
 ### Login
  - User name : chandu
