@@ -5,7 +5,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-ABEND is a AI powered,question answer application similr to stack overflow built using python, django, ckeditor, html.
+ABEND is a AI powered,question answer application similar to stack overflow built using python, django, ckeditor, html.
 
 Just starting out? Browse, Ask questions to your senior developers which helps in learning and code faster.Become a part of this application by sharing work. Write a Tutorial. Show your code directly in the browser and earn more likes, reputation from senior developers.
 
@@ -42,6 +42,10 @@ And of course ABEND itself is open source with a [public repository][ABEND]
 3-> run python manage.py makemigrations core
 4-> run python manage.py migrate
 5-> then python manage.py runserver.
+
+###Login
+User name : chandu
+Password : 123
 
 ### Todos
 
