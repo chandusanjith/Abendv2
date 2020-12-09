@@ -29,7 +29,9 @@ And of course ABEND itself is open source with a [public repository][ABEND]
  on GitHub.
 
 # Screen Shots
+![alt text](https://github.com/chandusanjith/Abendv2/blob/master/static/images/light.png?raw=true)
 
+![alt text](https://github.com/chandusanjith/Abendv2/blob/master/static/images/dark.png?raw=true)
 
 ### Installation
 
