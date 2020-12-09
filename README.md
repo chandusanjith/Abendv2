@@ -43,9 +43,9 @@ And of course ABEND itself is open source with a [public repository][ABEND]
 4-> run python manage.py migrate
 5-> then python manage.py runserver.
 
-###Login
-User name : chandu
-Password : 123
+### Login
+ - User name : chandu
+ - Password : 123
 
 ### Todos
 
